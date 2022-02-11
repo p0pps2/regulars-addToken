@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <script>
+      async function addToken() {
+        const tokenAddress = '0x84e7122440cb41935749a926be1dc96e2c4a5aa2';
+const tokenSymbol = '$REG';
+const tokenDecimals = 18;
+const tokenImage = window.location.href+'/img/reg.png';
+
+try {
+  if (!window.ethereum) return;
+  if (!ethereum) ethereum = window.ethereum;
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+      options: {
+        address: tokenAddress, // The address that the token is at.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: tokenDecimals, // The number of decimals in the token
+        image: tokenImage, // A string url of the token logo
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('Your loss!');
+  }
+} catch (error) {
+  console.log(error);
+}
+
+      }
+    </script>
+  </head>
+  <body>
+    <div style="margin-top: 40px; text-align: center;font-size: 20px">
+    Hello click button to add $REG token to your metamask
+    <button style="font-size: 20px;margin-top: 20px;display:block;margin-inline: auto; background: black; border: 2px solid #f7cc44; color: #f7cc44; padding: 20px;border-radius: 35px;" onclick="addToken()">Add $REG token</button>
+  </div>
+  </body>
+</html>
